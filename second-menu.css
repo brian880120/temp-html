@@ -1,0 +1,25 @@
+.second-menu-wrapper {
+    background-color: #0094CD;
+    height: 50px;
+}
+
+.second-menu {
+    display: flex;
+    color: #38D4E9;
+    font-size: 15px;
+    font-weight: 300;
+    padding-top: 17px;
+    padding-left: 25px;
+}
+
+.second-menu>div {
+    padding-right: 35px;
+}
+
+.second-menu>div:hover {
+    cursor: pointer;
+}
+
+.second-menu-triangle {
+    padding-top: 6px;
+}
