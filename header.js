@@ -62,6 +62,7 @@ var firstMenuItems = [{
 }];
 
 var header = {
+    firstMenuItems: firstMenuItems,
     initialComponent: initialComponent,
     onFirstMenuItemClick: onFirstMenuItemClick
 };
@@ -87,9 +88,10 @@ function onFirstMenuItemClick(name) {
 
     // change second menu items
     var html = '';
-    firstMenuItems[index].secondMenu.items.forEach(function(item) {
+    firstMenuItems[index].secondMenu.items.forEach(function(item, index) {
         var itemName = '\'' + item.name + '\'';
-        html += '<div><div onclick="secondMenu.onSecondMenuItemClick(' + itemName + ')">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
+        var itemIndex = '\'' + index + '\'';
+        html += '<div><div onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
     });
     $('.second-menu').html('');
     $('.second-menu').append(html);

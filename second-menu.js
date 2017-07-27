@@ -19,17 +19,19 @@ initialComponent();
 
 function initialComponent() {
     var html = '';
-    initSecondMenuItems.forEach(function(item) {
+    initSecondMenuItems.forEach(function(item, index) {
         var itemName = '\'' + item.name + '\'';
-        html += '<div><div onclick="secondMenu.onSecondMenuItemClick(' + itemName + ')">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
+        var itemIndex = '\'' + index + '\'';
+        html += '<div><div onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
     });
     $('.second-menu').append(html);
     hideAllSecondMenuTriangle();
     $($.find('.triangle-up-second-menu')[0]).css({'display': 'block'});
 }
 
-function onSecondMenuItemClick(name) {
-    console.log(name);
+function onSecondMenuItemClick(name, index) {
+    var items = hideAllSecondMenuTriangle();
+    $(items[index]).css({'display': 'block'});
 }
 
 function hideAllSecondMenuTriangle() {
