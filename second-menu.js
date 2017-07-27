@@ -32,6 +32,14 @@ function initialComponent() {
 function onSecondMenuItemClick(name, index) {
     var items = hideAllSecondMenuTriangle();
     $(items[index]).css({'display': 'block'});
+
+    // show or not show third menu
+    if (name === 'APPLICATION DEVELOPMENT') {
+        thirdMenu.showContent();
+        $(items[index]).css({'display': 'block', 'border-bottom-color': '#646258'});
+    } else {
+        thirdMenu.hideContent();
+    }
 }
 
 function hideAllSecondMenuTriangle() {

@@ -103,6 +103,9 @@ function onFirstMenuItemClick(name) {
     // display first triangle in second menu
     hideAllFirstMenuTriangle('.triangle-up-second-menu');
     $($.find('.triangle-up-second-menu')[0]).css({'display': 'block'});
+
+    // hide third menu
+    thirdMenu.hideContent();
 }
 
 function hideAllFirstMenuTriangle(className) {

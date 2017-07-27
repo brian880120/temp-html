@@ -1,5 +1,7 @@
 var thirdMenu = {
-    initialComponent: initialComponent
+    initialComponent: initialComponent,
+    hideContent: hideContent,
+    showContent: showContent
 };
 
 initialComponent();
@@ -10,4 +12,8 @@ function initialComponent() {
 
 function hideContent() {
     $('.flex-container').css({'display': 'none'});
+}
+
+function showContent() {
+    $('.flex-container').css({'display': 'flex'});
 }
