@@ -20,6 +20,7 @@ body {
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 10px solid white;
+    padding-top: 10px;
 }
 
 .header-wrapper {

@@ -1,6 +1,6 @@
 .second-menu-wrapper {
     background-color: #0094CD;
-    height: 50px;
+    min-height: 50px;
 }
 
 .second-menu {
@@ -13,7 +13,7 @@
 }
 
 .second-menu>div {
-    padding-right: 35px;
+    padding-right: 5%;
 }
 
 .second-menu>div:hover {
