@@ -90,49 +90,45 @@ var header = {
 };
 
 initialComponent();
-selectTab(0);
+selectMainMenuTab(0);
 
 function initialComponent() {
     var html = '';
     firstMenuItems.forEach(function(item) {
         var itemName = '\'' + item.name + '\'';
         var itemId =  'adm_' + item.name; // need to define better ID's
-        html += '<div class="adm_tab" id="'+itemId+'" data-selected="0" data-hassubmenu="" onclick="header.onFirstMenuItemClick(' + itemName + ')"><div class="adm_tab_label">' + item.name + '</div><div class="base-menu-triangle"><div class="triangle-up triangle-up-first-menu"></div></div></div>';
+        html += '<div class="adm_tab" id="'+itemId+'" data-selected="0" data-hassubmenu="1" onclick="header.onFirstMenuItemClick(' + itemName + ')"><div class="adm_label">' + item.name + '</div><div class="base-menu-triangle"><div class="triangle-up triangle-up-first-menu"></div></div></div>';
     });
     $('.header-menu').append(html);
-
-    /* Approptiate triangles should be displayed thought css*/
-    //hideAllFirstMenuTriangle('.triangle-up-first-menu');
-    //$($.find('.triangle-up-first-menu')[0]).css({'visibility': 'visible'});
-    deselectTabs();
-
-
 }
 
-function deselectTabs(){
+
+function selectMainMenuTab(tabIndex){
+    $($.find('.adm_tab')[tabIndex]).attr( 'data-selected','1' );
+    // here should be call to ddisplay first subnavigation
+    return null;
+}
+
+function deselectMainMenuTabs(){
     $.find('.adm_tab').forEach(function(item) {
         $(item).attr( 'data-selected','0' );
     });
+    return null;
 }
 
 
-function selectTab(tabIndex){
-    $($.find('.adm_tab')[tabIndex]).attr( 'data-selected','1' );
-}
 
 
 
 function onFirstMenuItemClick(name) {
-    // show/hide triangle
-    var index = findIndex(firstMenuItems, name);
-    deselectTabs();
-    selectTab(index);
 
-    //var items = hideAllFirstMenuTriangle('.triangle-up-first-menu');
+    var index = findIndex(firstMenuItems, name);
+    deselectMainMenuTabs();
+    selectMainMenuTab(index);
+
     var items = $.find('.triangle-up-first-menu');
 
     $(document.body).attr("data-theme",firstMenuItems[index].themeCSS);
-    //$(items[index]).css({'visibility': 'visible'});
 
 
     // change second menu items
@@ -140,27 +136,31 @@ function onFirstMenuItemClick(name) {
     firstMenuItems[index].secondMenu.items.forEach(function(item, index) {
         var itemName = '\'' + item.name + '\'';
         var itemIndex = '\'' + index + '\'';
-        html += '<div class="adm_tab"><div class="adm_tab_label" onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
+        html += '<div class="adm_tab__second" data-selected="0" data-hassubmenu="0" data-menudisplayed="0" onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')"><div class="adm_label" >' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
     });
     $('.second-menu').html('');
     $('.second-menu').append(html);
-    $($.find('.triangle-up-second-menu')[0]).css({'visibility': 'visible'});
 
 
     // display first triangle in second menu
+    deselectSecondMenuTabs();
+    $($.find('.adm_tab__second')[0]).attr( 'data-selected','1' );
     //hideAllFirstMenuTriangle('.triangle-up-second-menu');
-    $($.find('.triangle-up-second-menu')[0]).css({'visibility': 'visible'});
+    //$($.find('.triangle-up-second-menu')[0]).css({'visibility': 'visible'});
 
     // hide third menu
     thirdMenu.hideContent();
 }
 
+
+/*
 function hideAllFirstMenuTriangle(className) {
     $.find(className).forEach(function(item) {
         $(item).css({'visibility': 'hidden'});
     });
     return $.find('.triangle-up-first-menu');
 }
+*/
 
 function findIndex(items, target) {
     for (var i = 0; i < items.length; i++) {

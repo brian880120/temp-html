@@ -15,11 +15,11 @@ body {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 12px solid;
-    border-bottom-color: yellow;
 
 }
 
 .triangle-up-second-menu {
+    visibility: hidden;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 10px solid white;
@@ -38,45 +38,46 @@ body {
     font-weight: 200;
 }
 /* making first tab Bold */
-.header-menu .adm_tab:first-child .adm_tab_label {
+.header-menu [class*="adm_tab"]:first-child .adm_label {
   font-weight: 700;
 }
 
-.adm_tab {
+
+[class*="adm_tab"] {
     color: white;
     text-align: center;
     cursor: pointer;
 }
 
-.header-menu .adm_tab:hover .adm_tab_label,
-.second-menu .adm_tab:hover .adm_tab_label {
+.header-menu [class*="adm_tab"]:hover .adm_label,
+.second-menu [class*="adm_tab"]:hover .adm_label {
     opacity: 1;
 }
-
-
-.header-menu .adm_tab .adm_tab_label {
+.header-menu [class*="adm_tab"] .adm_label {
     margin: 1.4em .85em .7em .85em;
+    opacity: .6;
+}
+.second-menu [class*="adm_tab"] .adm_label {
+    margin: 0  1em .2em  1em;
+    font-weight: 500;
     opacity: .5;
 }
 
-
-.adm_tab[data-selected="1"] .adm_tab_label{
+[class*="adm_tab"][data-selected="1"] .adm_label{
     opacity: 1;
 }
-.adm_tab[data-selected="1"] .triangle-up-first-menu {
+
+/* Make triangle visible when TAB is selected */
+[class*="adm_tab"][data-selected="1"] [class*="triangle-up"] {
     visibility: visible;
 }
 
-.adm_tab[data-selected="0"]:hover .triangle-up-first-menu {
+[class*="adm_tab"][data-selected="0"]:hover .triangle-up-first-menu {
     visibility: visible;
     opacity: .2;
     border-bottom-color: white;
 }
-.second-menu .adm_tab .adm_tab_label {
-    margin: 0  1em .2em  1em;
-    font-weight: 500;
-    opacity: .6;
-}
+
 
 
 
@@ -86,7 +87,7 @@ body {
     font-weight: 300;
 }
 
-.second-menu .adm_tab {
+.second-menu [class*="adm_tab"] {
   display: table-cell;
   height: 3em;
   padding-top: .3em;
