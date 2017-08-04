@@ -1,8 +1,6 @@
-/*Importing Roboto*/
-var css = '@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese);\
-           @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese);\
-           @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);',
-    head = document.head || document.getElementsByTagName('head')[0],
+
+var css = '@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese);';
+    head = document.head || document.getElementsByTagName('head')[0];
     style = document.createElement('style');
 
 style.type = 'text/css';
@@ -12,70 +10,77 @@ if (style.styleSheet){
     style.appendChild(document.createTextNode(css));
 }
 head.appendChild(style);
-/* End of Importing Roboto*/
+//End of Importing Roboto
+
+// Load initial color theme
+$(document.body).attr("data-theme","theme_0094CD");
+
 
 
 var firstMenuItems = [{
     name: 'ADM',
-    triangleColor: '#0094CD', // color has to be in css
+    themeCSS: 'theme_0094CD',
     secondMenu: {
         color: '#0094CD',
         items: [{
-            name: 'HOME'
+            name: 'Home'
         }, {
-            name: 'ABOUT'
+            name: 'About'
         }, {
             name: 'F.A.Q'
         }, {
-            name: 'RESOURCES'
+            name: 'Resources'
         }, {
-            name: 'NEWS'
+            name: 'News'
         }]
     }
 }, {
     name: 'Practices',
-    triangleColor: '#F7971B',
+    themeCSS: 'theme_F7971B',
     secondMenu: {
         color: '#F7971B',
         items: [{
-            name: 'OVERVIEW'
+            name: 'Overview'
         }, {
-            name: 'APPLICATION DEVELOPMENT'
+            name: 'Application development'
         }, {
-            name: 'APPLICATION OUTSOURCING'
+            name: 'Application oursourcing'
         }, {
-            name: 'INTEGRATION SERVICES'
+            name: 'Integration services'
         }, {
-            name: 'DIGITAL'
+            name: 'Digital'
         }, {
-            name: 'ARCHITECTURE SERVICES'
+            name: 'Architecture services'
         }]
     }
 }, {
     name: 'Services',
-    triangleColor: '#8CC63E',
+    themeCSS: 'theme_8CC63E',
     secondMenu: {
         color: '#8CC63E',
         items: [{
-            name: 'OVERVIEW'
+            name: 'Overview'
         }, {
-            name: 'APPLICATION DEVELOPMENT'
+            name: 'Application development'
         }, {
-            name: 'APPLICATION OUTSOURCING'
+            name: 'Application oursourcing'
         }, {
-            name: 'DIGITAL ENABLEMENT'
+            name: 'Digital enablement'
         }, {
-            name: 'INTEGRATION SERVICES'
+            name: 'Integration services'
         }, {
-            name: 'TRAINING'
+            name: 'Traning'
         }]
     }
 }, {
-    name: 'Grow'
+    name: 'Grow',
+    themeCSS: 'theme_0094CD'
 }, {
-    name: 'Enable'
+    name: 'Enable',
+    themeCSS: 'theme_F7971B'
 }, {
-    name: 'Run'
+    name: 'Run',
+    themeCSS: 'theme_8CC63E'
 }];
 
 var header = {
@@ -97,33 +102,35 @@ function initialComponent() {
 
     /* Approptiate triangles should be displayed thought css*/
     hideAllFirstMenuTriangle('.triangle-up-first-menu');
-    $($.find('.triangle-up-first-menu')[0]).css({'display': 'block'});
-    //$( '#adm_ADM' ).attr( 'data-selected','--' );
+    //$($.find('.triangle-up-first-menu')[0]).css({'visibility': 'visible'});
+    $($.find('.adm_tab')[0]).attr( 'data-selected','1' );
+
 }
 
 function onFirstMenuItemClick(name) {
     // show/hide triangle
     var index = findIndex(firstMenuItems, name);
     var items = hideAllFirstMenuTriangle('.triangle-up-first-menu');
-    $(items[index]).css({'display': 'block', 'border-bottom-color': firstMenuItems[index].triangleColor});
+
+    $(document.body).attr("data-theme",firstMenuItems[index].themeCSS);
+    $(items[index]).css({'visibility': 'visible'});
+
 
     // change second menu items
     var html = '';
     firstMenuItems[index].secondMenu.items.forEach(function(item, index) {
         var itemName = '\'' + item.name + '\'';
         var itemIndex = '\'' + index + '\'';
-        html += '<div class="adm_tab"><div onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
+        html += '<div class="adm_tab"><div class="adm_tab_label" onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
     });
     $('.second-menu').html('');
     $('.second-menu').append(html);
-    $($.find('.triangle-up-second-menu')[0]).css({'display': 'block'});
+    $($.find('.triangle-up-second-menu')[0]).css({'visibility': 'visible'});
 
-    // change second menu background color
-    $('.second-menu-wrapper').css({'background-color': firstMenuItems[index].secondMenu.color});
 
     // display first triangle in second menu
-    hideAllFirstMenuTriangle('.triangle-up-second-menu');
-    $($.find('.triangle-up-second-menu')[0]).css({'display': 'block'});
+    //hideAllFirstMenuTriangle('.triangle-up-second-menu');
+    $($.find('.triangle-up-second-menu')[0]).css({'visibility': 'visible'});
 
     // hide third menu
     thirdMenu.hideContent();
@@ -131,7 +138,7 @@ function onFirstMenuItemClick(name) {
 
 function hideAllFirstMenuTriangle(className) {
     $.find(className).forEach(function(item) {
-        $(item).css({'display': 'none'});
+        $(item).css({'visibility': 'hidden'});
     });
     return $.find('.triangle-up-first-menu');
 }

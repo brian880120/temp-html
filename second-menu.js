@@ -4,15 +4,15 @@ var secondMenu = {
 };
 
 var initSecondMenuItems = [{
-    name: 'HOME'
+    name: 'Home'
 }, {
-    name: 'ABOUT'
+    name: 'About ADM'
 }, {
     name: 'F.A.Q'
 }, {
-    name: 'RESOURCES'
+    name: 'Resources'
 }, {
-    name: 'NEWS'
+    name: 'ADM news'
 }];
 
 initialComponent();
@@ -22,21 +22,21 @@ function initialComponent() {
     initSecondMenuItems.forEach(function(item, index) {
         var itemName = '\'' + item.name + '\'';
         var itemIndex = '\'' + index + '\'';
-        html += '<div><div onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
+        html += '<div class="adm_tab" onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')"><div class="adm_tab_label">' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
     });
     $('.second-menu').append(html);
     hideAllSecondMenuTriangle();
-    $($.find('.triangle-up-second-menu')[0]).css({'display': 'block'});
+    $($.find('.triangle-up-second-menu')[0]).css({'visibility': 'visible'});
 }
 
 function onSecondMenuItemClick(name, index) {
     var items = hideAllSecondMenuTriangle();
-    $(items[index]).css({'display': 'block'});
+    $(items[index]).css({'visility': 'visible'});
 
     // show or not show third menu
     if (name === 'APPLICATION DEVELOPMENT') {
         thirdMenu.showContent();
-        $(items[index]).css({'display': 'block', 'border-bottom-color': '#646258'});
+        $(items[index]).css({'visility': 'visible'});
     } else {
         thirdMenu.hideContent();
     }
@@ -44,7 +44,7 @@ function onSecondMenuItemClick(name, index) {
 
 function hideAllSecondMenuTriangle() {
     $.find('.triangle-up-second-menu').forEach(function(item) {
-        $(item).css({'display': 'none'});
+        $(item).css({'visibility': 'hidden'});
     });
     return $.find('.triangle-up-second-menu');
 }

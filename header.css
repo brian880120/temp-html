@@ -14,15 +14,15 @@ body {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 12px solid;
-    border-bottom-color: #0094CD;
-    display: none;
+    border-bottom-color: yellow;
+
 }
 
 .triangle-up-second-menu {
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 10px solid white;
-    padding-top: 10px;
+
 }
 
 .header-wrapper {
@@ -43,28 +43,79 @@ body {
 
 .adm_tab {
     color: white;
+    text-align: center;
     cursor: pointer;
 }
 
-.adm_tab .adm_tab_label {
-    opacity: .5;
-}
-
-.adm_tab:hover .adm_tab_label {
+.header-menu .adm_tab:hover .adm_tab_label,
+.second-menu .adm_tab:hover .adm_tab_label {
     opacity: 1;
 }
 
 
-.adm_tab .adm_tab_label {
+.header-menu .adm_tab .adm_tab_label {
+    margin: 1.4em .85em .7em .85em;
+    opacity: .5;
 }
 
 
-.header-menu .adm_tab .adm_tab_label {
-      margin: 1.4em .85em .7em .85em;
+.adm_tab[data-selected="1"] .adm_tab_label{
+    opacity: 1;
+}
+.adm_tab[data-selected="1"] .triangle-up-first-menu {
+  visibility: visible;
 }
 
 .second-menu .adm_tab .adm_tab_label {
-    margin: .7em  1em .2em  1em;
-
+    margin: 0  1em .2em  1em;
     font-weight: 500;
+    opacity: .6;
+}
+
+
+
+.second-menu {
+    display: table;
+    font-size: .9em;
+    font-weight: 300;
+}
+
+.second-menu .adm_tab {
+  display: table-cell;
+  height: 3em;
+  padding-top: .3em;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}
+
+
+
+
+
+/* Color themes */
+body[data-theme="theme_0094CD"] .second-menu-wrapper {
+    background-color: #0094CD; /* blue */
+}
+
+body[data-theme="theme_0094CD"] .triangle-up-first-menu {
+    border-bottom-color: #0094CD; /* blue */
+}
+
+
+
+body[data-theme="theme_F7971B"] .second-menu-wrapper {
+    background-color: #F7971B; /* orange */
+}
+
+body[data-theme="theme_F7971B"] .triangle-up-first-menu {
+    border-bottom-color: #F7971B; /* blue */
+}
+
+
+
+body[data-theme="theme_8CC63E"] .second-menu-wrapper {
+    background-color: #8CC63E; /* green */
+}
+body[data-theme="theme_8CC63E"] .triangle-up-first-menu {
+    border-bottom-color: #8CC63E; /* blue */
 }

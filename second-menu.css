@@ -1,16 +1,13 @@
+
+
+/*
 .second-menu-wrapper {
-    background-color: #0094CD;
     min-height: 50px;
 }
+*/
 
-.second-menu {
-    display: flex;
-    font-size: 15px;
-    font-weight: 300;
-    padding-top: 17px;
-    padding-left: 25px;
-}
 
+/*
 .second-menu>div {
     padding-right: 5%;
 }
@@ -22,3 +19,4 @@
 .second-menu-triangle {
     padding-top: 6px;
 }
+*/
