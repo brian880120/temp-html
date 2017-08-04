@@ -11,6 +11,7 @@ body {
 }
 
 .triangle-up-first-menu {
+    visibility: hidden;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 12px solid;
@@ -63,9 +64,14 @@ body {
     opacity: 1;
 }
 .adm_tab[data-selected="1"] .triangle-up-first-menu {
-  visibility: visible;
+    visibility: visible;
 }
 
+.adm_tab[data-selected="0"]:hover .triangle-up-first-menu {
+    visibility: visible;
+    opacity: .2;
+    border-bottom-color: white;
+}
 .second-menu .adm_tab .adm_tab_label {
     margin: 0  1em .2em  1em;
     font-weight: 500;

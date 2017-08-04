@@ -90,6 +90,7 @@ var header = {
 };
 
 initialComponent();
+selectTab(0);
 
 function initialComponent() {
     var html = '';
@@ -101,19 +102,37 @@ function initialComponent() {
     $('.header-menu').append(html);
 
     /* Approptiate triangles should be displayed thought css*/
-    hideAllFirstMenuTriangle('.triangle-up-first-menu');
+    //hideAllFirstMenuTriangle('.triangle-up-first-menu');
     //$($.find('.triangle-up-first-menu')[0]).css({'visibility': 'visible'});
-    $($.find('.adm_tab')[0]).attr( 'data-selected','1' );
+    deselectTabs();
+
 
 }
+
+function deselectTabs(){
+    $.find('.adm_tab').forEach(function(item) {
+        $(item).attr( 'data-selected','0' );
+    });
+}
+
+
+function selectTab(tabIndex){
+    $($.find('.adm_tab')[tabIndex]).attr( 'data-selected','1' );
+}
+
+
 
 function onFirstMenuItemClick(name) {
     // show/hide triangle
     var index = findIndex(firstMenuItems, name);
-    var items = hideAllFirstMenuTriangle('.triangle-up-first-menu');
+    deselectTabs();
+    selectTab(index);
+
+    //var items = hideAllFirstMenuTriangle('.triangle-up-first-menu');
+    var items = $.find('.triangle-up-first-menu');
 
     $(document.body).attr("data-theme",firstMenuItems[index].themeCSS);
-    $(items[index]).css({'visibility': 'visible'});
+    //$(items[index]).css({'visibility': 'visible'});
 
 
     // change second menu items
