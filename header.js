@@ -123,13 +123,14 @@ function deselectMainMenuTabs(){
 function onFirstMenuItemClick(name) {
 
     var index = findIndex(firstMenuItems, name);
+    //alert("onFirstMenuItemClick Found - " + name);
     deselectMainMenuTabs();
     selectMainMenuTab(index);
 
     var items = $.find('.triangle-up-first-menu');
 
+    // update BODY with corresponding Skin
     $(document.body).attr("data-theme",firstMenuItems[index].themeCSS);
-
 
     // change second menu items
     var html = '';
@@ -138,12 +139,14 @@ function onFirstMenuItemClick(name) {
         var itemIndex = '\'' + index + '\'';
         html += '<div class="adm_tab__second" data-selected="0" data-hassubmenu="0" data-menudisplayed="0" onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')"><div class="adm_label" >' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
     });
+
+    //Switching one Subnavigation to anotrher
     $('.second-menu').html('');
     $('.second-menu').append(html);
 
-
     // display first triangle in second menu
-    deselectSecondMenuTabs();
+    // deselectSecondMenuTabs(); // SR: I think when new submenu displayed NON of the tabs is selected anyway
+
     $($.find('.adm_tab__second')[0]).attr( 'data-selected','1' );
     //hideAllFirstMenuTriangle('.triangle-up-second-menu');
     //$($.find('.triangle-up-second-menu')[0]).css({'visibility': 'visible'});
