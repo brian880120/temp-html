@@ -22,7 +22,8 @@ var menuItem = {
             items: [{
                 name: 'Overview'
             }, {
-                name: 'Application Development'
+                name: 'Application Development',
+                hasSubmenu: true
             }, {
                 name: 'Application Outsourcing'
             }, {

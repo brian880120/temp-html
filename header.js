@@ -83,12 +83,10 @@ function onSecondMenuItemClick(name, index) {
     deselectMenuTabs('.adm_tab__second');
     selectMenuTab(index, '.adm_tab__second');
     constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[index].name]);
-    // show or not show third menu
-    if (name === 'Application Development') {
-        $($.find('.adm_tab__second')[index]).attr( 'data-hassubmenu', '1' );
+
+    thirdMenu.hideContent();
+    if ($($.find('.adm_tab__second')[index]).attr('data-hassubmenu') === '1') {
         thirdMenu.showContent();
-    } else {
-        thirdMenu.hideContent();
     }
 }
 
@@ -97,8 +95,13 @@ function constructSecondMenu(tabIndex) {
     menuItem.data[tabIndex].secondMenu.items.forEach(function(item, index) {
         var itemName = '\'' + item.name + '\'';
         var itemIndex = '\'' + index + '\'';
+        var hasSubmenu = '"0"';
+        if (item.hasSubmenu) {
+            hasSubmenu = '"1"';
+        }
         html += '<div class="adm_tab__second"' +
                     'data-selected="0"' +
+                    'data-hassubmenu=' + hasSubmenu +
                     'data-hassubmenu="0"' +
                     'data-menudisplayed="0"' +
                     'onclick="onSecondMenuItemClick(' + itemName + ', ' + index + ')">' +
