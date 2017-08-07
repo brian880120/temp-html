@@ -15,155 +15,84 @@ head.appendChild(style);
 // Load initial color theme
 $(document.body).attr("data-theme","theme_0094CD");
 
-
-
-var firstMenuItems = [{
-    name: 'ADM',
-    themeCSS: 'theme_0094CD',
-    secondMenu: {
-        color: '#0094CD',
-        items: [{
-            name: 'Home'
-        }, {
-            name: 'About'
-        }, {
-            name: 'F.A.Q'
-        }, {
-            name: 'Resources'
-        }, {
-            name: 'News'
-        }]
-    }
-}, {
-    name: 'Practices',
-    themeCSS: 'theme_F7971B',
-    secondMenu: {
-        color: '#F7971B',
-        items: [{
-            name: 'Overview'
-        }, {
-            name: 'Application development'
-        }, {
-            name: 'Application oursourcing'
-        }, {
-            name: 'Integration services'
-        }, {
-            name: 'Digital'
-        }, {
-            name: 'Architecture services'
-        }]
-    }
-}, {
-    name: 'Services',
-    themeCSS: 'theme_8CC63E',
-    secondMenu: {
-        color: '#8CC63E',
-        items: [{
-            name: 'Overview'
-        }, {
-            name: 'Application development'
-        }, {
-            name: 'Application oursourcing'
-        }, {
-            name: 'Digital enablement'
-        }, {
-            name: 'Integration services'
-        }, {
-            name: 'Traning'
-        }]
-    }
-}, {
-    name: 'Grow',
-    themeCSS: 'theme_0094CD'
-}, {
-    name: 'Enable',
-    themeCSS: 'theme_F7971B'
-}, {
-    name: 'Run',
-    themeCSS: 'theme_8CC63E'
-}];
-
-var header = {
-    firstMenuItems: firstMenuItems,
-    initialComponent: initialComponent,
-    onFirstMenuItemClick: onFirstMenuItemClick
-};
-
 initialComponent();
-selectMainMenuTab(0);
 
 function initialComponent() {
     var html = '';
-    firstMenuItems.forEach(function(item) {
+    menuItem.data.forEach(function(item) {
         var itemName = '\'' + item.name + '\'';
         var itemId =  'adm_' + item.name; // need to define better ID's
-        html += '<div class="adm_tab" id="'+itemId+'" data-selected="0" data-hassubmenu="1" onclick="header.onFirstMenuItemClick(' + itemName + ')"><div class="adm_label">' + item.name + '</div><div class="base-menu-triangle"><div class="triangle-up triangle-up-first-menu"></div></div></div>';
+        html += '<div class="adm_tab" id="'+ itemId + '" data-selected="0"' +
+                    'data-hassubmenu="1"' +
+                    'onclick="onFirstMenuItemClick(' + itemName + ')">' +
+                    '<div class="adm_label">' + item.name + '</div>' +
+                    '<div class="base-menu-triangle">' +
+                        '<div class="triangle-up triangle-up-first-menu"></div>' +
+                    '</div>' +
+                '</div>';
     });
     $('.header-menu').append(html);
+    selectMenuTab(0, '.adm_tab');
+    constructSecondMenu(0);
+    selectMenuTab(0, '.adm_tab__second');
 }
 
-
-function selectMainMenuTab(tabIndex){
-    $($.find('.adm_tab')[tabIndex]).attr( 'data-selected','1' );
-    // here should be call to ddisplay first subnavigation
-    return null;
+function selectMenuTab(tabIndex, className){
+    $($.find(className)[tabIndex]).attr( 'data-selected','1' );
 }
 
-function deselectMainMenuTabs(){
-    $.find('.adm_tab').forEach(function(item) {
+function deselectMenuTabs(className) {
+    $.find(className).forEach(function(item) {
         $(item).attr( 'data-selected','0' );
     });
-    return null;
 }
 
-
-
-
-
 function onFirstMenuItemClick(name) {
+    var index = findIndex(menuItem.data, name);
+    deselectMenuTabs('.adm_tab');
+    selectMenuTab(index, '.adm_tab');
+    constructSecondMenu(index);
 
-    var index = findIndex(firstMenuItems, name);
-    //alert("onFirstMenuItemClick Found - " + name);
-    deselectMainMenuTabs();
-    selectMainMenuTab(index);
-
-    var items = $.find('.triangle-up-first-menu');
-
-    // update BODY with corresponding Skin
-    $(document.body).attr("data-theme",firstMenuItems[index].themeCSS);
-
-    // change second menu items
-    var html = '';
-    firstMenuItems[index].secondMenu.items.forEach(function(item, index) {
-        var itemName = '\'' + item.name + '\'';
-        var itemIndex = '\'' + index + '\'';
-        html += '<div class="adm_tab__second" data-selected="0" data-hassubmenu="0" data-menudisplayed="0" onclick="secondMenu.onSecondMenuItemClick(' + itemName + ', ' + index + ')"><div class="adm_label" >' + item.name + '</div><div class="second-menu-triangle"><div class="triangle-up triangle-up-second-menu"></div></div></div>';
-    });
-
-    //Switching one Subnavigation to anotrher
-    $('.second-menu').html('');
-    $('.second-menu').append(html);
-
-    // display first triangle in second menu
-    // deselectSecondMenuTabs(); // SR: I think when new submenu displayed NON of the tabs is selected anyway
+    $(document.body).attr("data-theme",menuItem.data[index].themeCSS);
 
     $($.find('.adm_tab__second')[0]).attr( 'data-selected','1' );
-    //hideAllFirstMenuTriangle('.triangle-up-second-menu');
-    //$($.find('.triangle-up-second-menu')[0]).css({'visibility': 'visible'});
 
     // hide third menu
     thirdMenu.hideContent();
 }
 
-
-/*
-function hideAllFirstMenuTriangle(className) {
-    $.find(className).forEach(function(item) {
-        $(item).css({'visibility': 'hidden'});
-    });
-    return $.find('.triangle-up-first-menu');
+function onSecondMenuItemClick(name, index) {
+    deselectMenuTabs('.adm_tab__second');
+    selectMenuTab(index, '.adm_tab__second');
+    // show or not show third menu
+    if (name === 'Application development') {
+        thirdMenu.showContent();
+    } else {
+        thirdMenu.hideContent();
+    }
 }
-*/
+
+function constructSecondMenu(tabIndex) {
+    var html = '';
+    menuItem.data[tabIndex].secondMenu.items.forEach(function(item, index) {
+        var itemName = '\'' + item.name + '\'';
+        var itemIndex = '\'' + index + '\'';
+        html += '<div class="adm_tab__second"' +
+                    'data-selected="0"' +
+                    'data-hassubmenu="0"' +
+                    'data-menudisplayed="0"' +
+                    'onclick="onSecondMenuItemClick(' + itemName + ', ' + index + ')">' +
+                    '<div class="adm_label" >' + item.name + '</div>' +
+                    '<div class="second-menu-triangle">' +
+                        '<div class="triangle-up triangle-up-second-menu"></div>' +
+                    '</div>' +
+                '</div>';
+    });
+
+    // TODO: Switching one Subnavigation to anotrher
+    $('.second-menu').html('');
+    $('.second-menu').append(html);
+}
 
 function findIndex(items, target) {
     for (var i = 0; i < items.length; i++) {

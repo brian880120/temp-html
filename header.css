@@ -31,17 +31,16 @@ body {
     background-color: #404040;
 }
 
-
 .header-menu {
     display: flex;
     font-size: 24px;
     font-weight: 200;
 }
+
 /* making first tab Bold */
 .header-menu [class*="adm_tab"]:first-child .adm_label {
   font-weight: 700;
 }
-
 
 [class*="adm_tab"] {
     color: white;
@@ -53,10 +52,12 @@ body {
 .second-menu [class*="adm_tab"]:hover .adm_label {
     opacity: 1;
 }
+
 .header-menu [class*="adm_tab"] .adm_label {
     margin: 1.4em .85em .7em .85em;
     opacity: .6;
 }
+
 .second-menu [class*="adm_tab"] .adm_label {
     margin: 0  1em .2em  1em;
     font-weight: 500;
@@ -78,9 +79,6 @@ body {
     border-bottom-color: white;
 }
 
-
-
-
 .second-menu {
     display: table;
     font-size: .9em;
@@ -95,9 +93,15 @@ body {
   vertical-align: bottom;
 }
 
+[class*="adm_tab__second"][data-selected="1"] [class*="triangle-up"] {
+    visibility: visible;
+}
 
-
-
+[class*="adm_tab__second"][data-selected="0"]:hover .triangle-up-second-menu {
+    visibility: visible;
+    opacity: .2;
+    border-bottom-color: white;
+}
 
 /* Color themes */
 body[data-theme="theme_0094CD"] .second-menu-wrapper {
@@ -108,8 +112,6 @@ body[data-theme="theme_0094CD"] .triangle-up-first-menu {
     border-bottom-color: #0094CD; /* blue */
 }
 
-
-
 body[data-theme="theme_F7971B"] .second-menu-wrapper {
     background-color: #F7971B; /* orange */
 }
@@ -117,8 +119,6 @@ body[data-theme="theme_F7971B"] .second-menu-wrapper {
 body[data-theme="theme_F7971B"] .triangle-up-first-menu {
     border-bottom-color: #F7971B; /* blue */
 }
-
-
 
 body[data-theme="theme_8CC63E"] .second-menu-wrapper {
     background-color: #8CC63E; /* green */
