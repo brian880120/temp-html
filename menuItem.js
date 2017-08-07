@@ -3,7 +3,6 @@ var menuItem = {
         name: 'ADM',
         themeCSS: 'theme_0094CD',
         secondMenu: {
-            color: '#0094CD',
             items: [{
                 name: 'Home'
             }, {
@@ -20,7 +19,6 @@ var menuItem = {
         name: 'Practices',
         themeCSS: 'theme_F7971B',
         secondMenu: {
-            color: '#F7971B',
             items: [{
                 name: 'Overview'
             }, {
@@ -39,7 +37,6 @@ var menuItem = {
         name: 'Services',
         themeCSS: 'theme_8CC63E',
         secondMenu: {
-            color: '#8CC63E',
             items: [{
                 name: 'Overview'
             }, {

@@ -15,6 +15,8 @@ head.appendChild(style);
 // Load initial color theme
 $(document.body).attr("data-theme","theme_0094CD");
 
+var selectedFirstMenuItem = '';
+
 initialComponent();
 
 function initialComponent() {
@@ -33,8 +35,23 @@ function initialComponent() {
     });
     $('.header-menu').append(html);
     selectMenuTab(0, '.adm_tab');
+    selectedFirstMenuItem = menuItem.data[0];
     constructSecondMenu(0);
     selectMenuTab(0, '.adm_tab__second');
+    constructBreadcrumb(['ADM', 'Home']);
+}
+
+function constructBreadcrumb(items) {
+    var html = '<div class="bread-crumb">';
+    $('#breadcrumb').html(html);
+    items.forEach(function(item, index) {
+        html += '<span>' + item + '</span>'
+        if (index !== items.length - 1) {
+            html += '<span class="breadcrumb-spliter">//</span>';
+        }
+    });
+    html += '</div>'
+    $('#breadcrumb').append(html);
 }
 
 function selectMenuTab(tabIndex, className){
@@ -51,8 +68,9 @@ function onFirstMenuItemClick(name) {
     var index = findIndex(menuItem.data, name);
     deselectMenuTabs('.adm_tab');
     selectMenuTab(index, '.adm_tab');
+    selectedFirstMenuItem = menuItem.data[index];
     constructSecondMenu(index);
-
+    constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[0].name]);
     $(document.body).attr("data-theme",menuItem.data[index].themeCSS);
 
     $($.find('.adm_tab__second')[0]).attr( 'data-selected','1' );
@@ -64,8 +82,10 @@ function onFirstMenuItemClick(name) {
 function onSecondMenuItemClick(name, index) {
     deselectMenuTabs('.adm_tab__second');
     selectMenuTab(index, '.adm_tab__second');
+    constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[index].name]);
     // show or not show third menu
     if (name === 'Application development') {
+        $($.find('.adm_tab__second')[index]).attr( 'data-hassubmenu', '1' );
         thirdMenu.showContent();
     } else {
         thirdMenu.hideContent();
