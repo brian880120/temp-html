@@ -39,6 +39,7 @@ function initialComponent() {
     constructSecondMenu(0);
     selectMenuTab(0, '.adm_tab__second');
     constructBreadcrumb(['ADM', 'Home']);
+    constructThirdMenu();
 }
 
 function constructBreadcrumb(items) {
@@ -74,20 +75,37 @@ function onFirstMenuItemClick(name) {
     $(document.body).attr("data-theme",menuItem.data[index].themeCSS);
 
     $($.find('.adm_tab__second')[0]).attr( 'data-selected','1' );
-
-    // hide third menu
-    thirdMenu.hideContent();
+    $($.find(".flex-container")[0]).attr( 'data-show','0' );
 }
 
 function onSecondMenuItemClick(name, index) {
-    deselectMenuTabs('.adm_tab__second');
+    var submenuStatus = $($.find('.adm_tab__second')[index]).attr('data-hassubmenu');
+    if (submenuStatus !== '1') {
+        deselectMenuTabs('.adm_tab__second');
+    }
     selectMenuTab(index, '.adm_tab__second');
     constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[index].name]);
 
-    thirdMenu.hideContent();
-    if ($($.find('.adm_tab__second')[index]).attr('data-hassubmenu') === '1') {
-        thirdMenu.showContent();
+    $($.find(".flex-container")[0]).attr( 'data-show','0' );
+    if (submenuStatus === '1') {
+        $($.find(".flex-container")[0]).attr( 'data-show','1' );
     }
+}
+
+function constructThirdMenu() {
+    var html = '<div class="flex-container" data-show="0">';
+    tempThirdMenuItems.data.forEach(function(item) {
+        html += '<div class="flex-item">' +
+                    '<div class="flex-item-title">' +
+                        item.thirdLevelTitle +
+                    '</div>';
+        item.forthLevelItems.forEach(function(item) {
+            html += '<div>' + item.name + '</div>';
+        });
+        html += '</div>';
+    });
+    html += '</div>'
+    $("#third-menu").append(html);
 }
 
 function constructSecondMenu(tabIndex) {
