@@ -15,7 +15,10 @@ head.appendChild(style);
 // Load initial color theme
 $(document.body).attr("data-theme","theme_0094CD");
 
-var selectedFirstMenuItem = '';
+var selectedFirstMenuItem = null;
+var selectedSecondMenuItem = null;
+var selectedThirdMenuItem = null;
+var selectedForthMenuItem = null;
 
 initialComponent();
 
@@ -42,29 +45,6 @@ function initialComponent() {
     constructThirdMenu();
 }
 
-function constructBreadcrumb(items) {
-    var html = '<div class="bread-crumb">';
-    $('#breadcrumb').html(html);
-    items.forEach(function(item, index) {
-        html += '<span>' + item + '</span>'
-        if (index !== items.length - 1) {
-            html += '<span class="breadcrumb-spliter">//</span>';
-        }
-    });
-    html += '</div>'
-    $('#breadcrumb').append(html);
-}
-
-function selectMenuTab(tabIndex, className){
-    $($.find(className)[tabIndex]).attr( 'data-selected','1' );
-}
-
-function deselectMenuTabs(className) {
-    $.find(className).forEach(function(item) {
-        $(item).attr( 'data-selected','0' );
-    });
-}
-
 function onFirstMenuItemClick(name) {
     var index = findIndex(menuItem.data, name);
     deselectMenuTabs('.adm_tab');
@@ -84,28 +64,34 @@ function onSecondMenuItemClick(name, index) {
         deselectMenuTabs('.adm_tab__second');
     }
     selectMenuTab(index, '.adm_tab__second');
+    selectedSecondMenuItem = selectedFirstMenuItem.secondMenu.items[index];
     constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[index].name]);
 
     $($.find(".flex-container")[0]).attr( 'data-show','0' );
     if (submenuStatus === '1') {
         $($.find(".flex-container")[0]).attr( 'data-show','1' );
+        $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '1');
     }
 }
 
-function constructThirdMenu() {
-    var html = '<div class="flex-container" data-show="0">';
-    tempThirdMenuItems.data.forEach(function(item) {
-        html += '<div class="flex-item">' +
-                    '<div class="flex-item-title">' +
-                        item.thirdLevelTitle +
-                    '</div>';
-        item.forthLevelItems.forEach(function(item) {
-            html += '<div>' + item.name + '</div>';
-        });
-        html += '</div>';
-    });
-    html += '</div>'
-    $("#third-menu").append(html);
+function onThirdMenuItemClick(name, index) {
+    $($.find(".flex-container")[0]).attr( 'data-show','0' );
+    deselectMenuTabs('.adm_tab__second');
+    selectedThirdMenuItem = name;
+    selectMenuTab(findSelectedSecondMenuItem(), '.adm_tab__second');
+    $($.find(".adm_tab__second")[findSelectedSecondMenuItem()]).attr('data-menudisplayed', '0');
+    constructBreadcrumb([selectedFirstMenuItem.name, selectedSecondMenuItem.name, name]);
+}
+
+function onForthMenuItemClick(name, index) {
+    $($.find(".flex-container")[0]).attr( 'data-show','0' );
+    deselectMenuTabs('.adm_tab__second');
+    selectMenuTab(findSelectedSecondMenuItem(), '.adm_tab__second');
+    $($.find(".adm_tab__second")[findSelectedSecondMenuItem()]).attr('data-menudisplayed', '0');
+    if (!selectedThirdMenuItem) {
+        selectedThirdMenuItem = 'Some Title Level 3';
+    }
+    constructBreadcrumb([selectedFirstMenuItem.name, selectedSecondMenuItem.name, selectedThirdMenuItem, name]);
 }
 
 function constructSecondMenu(tabIndex) {
@@ -132,6 +118,60 @@ function constructSecondMenu(tabIndex) {
     // TODO: Switching one Subnavigation to anotrher
     $('.second-menu').html('');
     $('.second-menu').append(html);
+}
+
+function constructThirdMenu() {
+    var html = '<div class="flex-container" data-show="0">';
+    tempThirdMenuItems.data.forEach(function(item, index) {
+        var itemName = '\'' + item.thirdLevelTitle + '\'';
+        html += '<div class="flex-item">' +
+                    '<div class="flex-item-title"' +
+                            'onclick="onThirdMenuItemClick(' + itemName + ', ' + index + ')">' +
+                        item.thirdLevelTitle +
+                    '</div>';
+        item.forthLevelItems.forEach(function(item) {
+            var itemName = '\'' + item.name + '\'';
+            html += '<div onclick="onForthMenuItemClick(' + itemName + ', ' + index + ')">' +
+                        item.name +
+                    '</div>';
+        });
+        html += '</div>';
+    });
+    html += '</div>'
+    $("#third-menu").append(html);
+}
+
+function constructBreadcrumb(items) {
+    var html = '<div class="bread-crumb">';
+    $('#breadcrumb').html(html);
+    items.forEach(function(item, index) {
+        html += '<span>' + item + '</span>'
+        if (index !== items.length - 1) {
+            html += '<span class="breadcrumb-spliter">//</span>';
+        }
+    });
+    html += '</div>'
+    $('#breadcrumb').append(html);
+}
+
+function selectMenuTab(tabIndex, className){
+    $($.find(className)[tabIndex]).attr( 'data-selected','1' );
+}
+
+function deselectMenuTabs(className) {
+    $.find(className).forEach(function(item) {
+        $(item).attr( 'data-selected','0' );
+    });
+}
+
+function findSelectedSecondMenuItem() {
+    var selectedSecondMenuItemIndex = null;
+    $.find('.adm_tab__second').forEach(function(item, index) {
+        if ($(item).attr('data-menudisplayed') === '1') {
+            selectedSecondMenuItemIndex = index;
+        }
+    });
+    return selectedSecondMenuItemIndex;
 }
 
 function findIndex(items, target) {

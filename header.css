@@ -148,12 +148,20 @@ body {
     visibility: visible;
 }
 
-[class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"] .triangle-up-second-menu {
+[class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"][data-menudisplayed="1"] .triangle-up-second-menu {
     border-bottom-color: #646258;
 }
 
-[class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"] .adm_label {
+[class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"][data-menudisplayed="0"] .triangle-up-second-menu {
+    border-bottom-color: white;
+}
+
+[class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"][data-menudisplayed="1"] .adm_label {
     color: #646258;
+}
+
+[class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"][data-menudisplayed="0"] .adm_label {
+    color: white;
 }
 
 /* Color themes */
