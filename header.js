@@ -102,7 +102,6 @@ function constructSecondMenu(tabIndex) {
         html += '<div class="adm_tab__second"' +
                     'data-selected="0"' +
                     'data-hassubmenu=' + hasSubmenu +
-                    'data-hassubmenu="0"' +
                     'data-menudisplayed="0"' +
                     'onclick="onSecondMenuItemClick(' + itemName + ', ' + index + ')">' +
                     '<div class="adm_label" >' + item.name + '</div>' +
