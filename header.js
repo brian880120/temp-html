@@ -67,11 +67,13 @@ function onSecondMenuItemClick(name, index) {
     selectedSecondMenuItem = selectedFirstMenuItem.secondMenu.items[index];
     constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[index].name]);
 
-    $($.find(".flex-container")[0]).attr( 'data-show','0' );
     if (submenuStatus === '1') {
         if ($($.find(".adm_tab__second")[index]).attr('data-menudisplayed') === '1') {
             $($.find(".flex-container")[0]).attr( 'data-show','0' );
             $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '0');
+            var previewSelectedIndex = findPreviousSelectedSecondMenuItem() | 0;
+            deselectMenuTabs('.adm_tab__second');
+            selectMenuTab(previewSelectedIndex, '.adm_tab__second');
         } else {
             $($.find(".flex-container")[0]).attr( 'data-show','1' );
             $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '1');
@@ -177,6 +179,16 @@ function findSelectedSecondMenuItem() {
         }
     });
     return selectedSecondMenuItemIndex;
+}
+
+function findPreviousSelectedSecondMenuItem() {
+    var selectedIndex = null;
+    $.find('.adm_tab__second').forEach(function(item, index) {
+        if ($(item).attr('data-hassubmenu') === '0' && $(item).attr('data-selected') === '1') {
+            selectedIndex = index;
+        }
+    });
+    return selectedIndex;
 }
 
 function findIndex(items, target) {
