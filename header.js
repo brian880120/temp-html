@@ -69,8 +69,13 @@ function onSecondMenuItemClick(name, index) {
 
     $($.find(".flex-container")[0]).attr( 'data-show','0' );
     if (submenuStatus === '1') {
-        $($.find(".flex-container")[0]).attr( 'data-show','1' );
-        $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '1');
+        if ($($.find(".adm_tab__second")[index]).attr('data-menudisplayed') === '1') {
+            $($.find(".flex-container")[0]).attr( 'data-show','0' );
+            $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '0');
+        } else {
+            $($.find(".flex-container")[0]).attr( 'data-show','1' );
+            $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '1');
+        }
     }
 }
 
