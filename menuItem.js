@@ -114,7 +114,7 @@ var tempThirdMenuItems = {
             name: 'Events'
         }]
     }, {
-        thirdLevelTitle: 'Some Title Level 3',
+        thirdLevelTitle: 'Some Title Level 3b',
         forthLevelItems: [{
             name: 'Organization'
         }, {
@@ -123,34 +123,22 @@ var tempThirdMenuItems = {
             name: 'Centers'
         }, {
             name: 'Pre-Sales and Marketing'
+        }]
+    }, {
+        thirdLevelTitle: 'Some Title Level 3c',
+        forthLevelItems: [{
+            name: 'Organization'
+        }, {
+            name: 'Pre-Sales and Marketing some long title test string'
         }, {
             name: 'Events'
         }]
     }, {
-        thirdLevelTitle: 'Some Title Level 3',
-        forthLevelItems: [{
-            name: 'Organization'
-        }, {
+        thirdLevelTitle: 'Some Title Level 3d',
+        forthLevelItems: [ {
             name: 'Certifications'
         }, {
             name: 'Centers'
-        }, {
-            name: 'Pre-Sales and Marketing'
-        }, {
-            name: 'Events'
-        }]
-    }, {
-        thirdLevelTitle: 'Some Title Level 3',
-        forthLevelItems: [{
-            name: 'Organization'
-        }, {
-            name: 'Certifications'
-        }, {
-            name: 'Centers'
-        }, {
-            name: 'Pre-Sales and Marketing'
-        }, {
-            name: 'Events'
         }]
     }]
 };

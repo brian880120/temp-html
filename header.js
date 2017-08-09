@@ -131,7 +131,7 @@ function constructThirdMenu() {
                     '</div>';
         item.forthLevelItems.forEach(function(item) {
             var itemName = '\'' + item.name + '\'';
-            html += '<div onclick="onForthMenuItemClick(' + itemName + ', ' + index + ')">' +
+            html += '<div class="item-menu-l4" onclick="onForthMenuItemClick(' + itemName + ', ' + index + ')">' +
                         item.name +
                     '</div>';
         });
@@ -145,7 +145,7 @@ function constructBreadcrumb(items) {
     var html = '<div class="bread-crumb">';
     $('#breadcrumb').html(html);
     items.forEach(function(item, index) {
-        html += '<span>' + item + '</span>'
+        html += '<span class="breadcrumb-item">' + item + '</span>'
         if (index !== items.length - 1) {
             html += '<span class="breadcrumb-spliter">//</span>';
         }
