@@ -62,11 +62,12 @@ function onSecondMenuItemClick(name, index) {
     var submenuStatus = $($.find('.adm_tab__second')[index]).attr('data-hassubmenu');
     if (submenuStatus !== '1') {
         deselectMenuTabs('.adm_tab__second');
+        resetMenuDisplay();
+        constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[index].name]);
     }
     selectMenuTab(index, '.adm_tab__second');
     selectedSecondMenuItem = selectedFirstMenuItem.secondMenu.items[index];
-    constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[index].name]);
-
+    $($.find(".flex-container")[0]).attr( 'data-show','0' );
     if (submenuStatus === '1') {
         if ($($.find(".adm_tab__second")[index]).attr('data-menudisplayed') === '1') {
             $($.find(".flex-container")[0]).attr( 'data-show','0' );
@@ -77,14 +78,15 @@ function onSecondMenuItemClick(name, index) {
         } else {
             $($.find(".flex-container")[0]).attr( 'data-show','1' );
             $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '1');
+            selectMenuTab(index, '.adm_tab__second');
         }
     }
 }
 
 function onThirdMenuItemClick(name, index) {
     $($.find(".flex-container")[0]).attr( 'data-show','0' );
-    deselectMenuTabs('.adm_tab__second');
     selectedThirdMenuItem = name;
+    deselectMenuTabs('.adm_tab__second');
     selectMenuTab(findSelectedSecondMenuItem(), '.adm_tab__second');
     $($.find(".adm_tab__second")[findSelectedSecondMenuItem()]).attr('data-menudisplayed', '0');
     constructBreadcrumb([selectedFirstMenuItem.name, selectedSecondMenuItem.name, name]);
@@ -168,6 +170,12 @@ function selectMenuTab(tabIndex, className){
 function deselectMenuTabs(className) {
     $.find(className).forEach(function(item) {
         $(item).attr( 'data-selected','0' );
+    });
+}
+
+function resetMenuDisplay() {
+    $.find('.adm_tab__second').forEach(function(item) {
+        $(item).attr( 'data-menudisplayed','0' );
     });
 }
 
