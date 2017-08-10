@@ -89,7 +89,7 @@ body {
 }
 
 /* Make triangle invisible when TAB is selected but another submenu is displayed */
-.second-menu[data-submenuisopen="1"] [class*="adm_tab"][data-selected="1"][data-menudisplayed="0"] [class*="triangle-up"] {
+.second-menu[data-submenuisopen="1"] [class*="adm_tab"][data-selected="1"][data-hassubmenu="0"][data-menudisplayed="0"] [class*="triangle-up"] {
     visibility: hidden;
 }
 
