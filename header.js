@@ -63,6 +63,7 @@ function onSecondMenuItemClick(name, index) {
     if (submenuStatus !== '1') {
         deselectMenuTabs('.adm_tab__second');
         resetMenuDisplay();
+        $($.find(".second-menu")[0]).attr( 'data-submenuisopen','0' );
         constructBreadcrumb([selectedFirstMenuItem.name, selectedFirstMenuItem.secondMenu.items[index].name]);
     }
     selectMenuTab(index, '.adm_tab__second');
@@ -74,10 +75,12 @@ function onSecondMenuItemClick(name, index) {
             $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '0');
             var previewSelectedIndex = findPreviousSelectedSecondMenuItem() | 0;
             deselectMenuTabs('.adm_tab__second');
+            $($.find(".second-menu")[0]).attr( 'data-submenuisopen','0' );
             selectMenuTab(previewSelectedIndex, '.adm_tab__second');
         } else {
             $($.find(".flex-container")[0]).attr( 'data-show','1' );
             $($.find(".adm_tab__second")[index]).attr('data-menudisplayed', '1');
+            $($.find(".second-menu")[0]).attr( 'data-submenuisopen','1' );
             selectMenuTab(index, '.adm_tab__second');
         }
     }
