@@ -98,10 +98,13 @@ body {
     display: flex;
     justify-content: space-between;
     flex-flow: row wrap;
-    position: absolute;
-    width: 100%;
-    z-index: 1;
     padding-bottom: 1em;
+}
+
+.third-menu-wrapper {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
 }
 
 .flex-item {

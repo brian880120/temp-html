@@ -147,20 +147,19 @@ function constructThirdMenu() {
         html += '</div>';
     });
     html += '</div>'
-    $("#third-menu").append(html);
+    $(".third-menu-wrapper").append(html);
 }
 
 function constructBreadcrumb(items) {
     var html = '<div class="bread-crumb">';
-    $('#breadcrumb').html(html);
     items.forEach(function(item, index) {
         html += '<span class="breadcrumb-item">' + item + '</span>'
         if (index !== items.length - 1) {
             html += '<span class="breadcrumb-spliter">//</span>';
         }
     });
-    html += '</div>'
-    $('#breadcrumb').append(html);
+    html += '</div>';
+    $('.breadcrumb-wrapper').html(html);
 }
 
 function selectMenuTab(tabIndex, className){
