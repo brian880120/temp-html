@@ -94,7 +94,7 @@ body {
 }
 
 .flex-container {
-    background-color: #646258;
+    background-color: #646464;
     display: flex;
     justify-content: space-between;
     flex-flow: row wrap;
@@ -158,7 +158,7 @@ body {
 }
 
 [class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"][data-menudisplayed="1"] .triangle-up-second-menu {
-    border-bottom-color: #646258;
+    border-bottom-color: #646464;
 }
 
 [class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"][data-menudisplayed="0"] .triangle-up-second-menu {
@@ -166,7 +166,7 @@ body {
 }
 
 [class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"][data-menudisplayed="1"] .adm_label {
-    color: #646258;
+    color: #404040;
 }
 
 [class*="adm_tab__second"][data-selected="1"][data-hassubmenu="1"][data-menudisplayed="0"] .adm_label {
