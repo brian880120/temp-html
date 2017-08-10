@@ -48,6 +48,15 @@ body {
     text-align: center;
     cursor: pointer;
 }
+.header-menu .adm_tab[data-selected="0"] {
+  opacity: .5;
+  -webkit-transition: opacity .5s; /* For Safari 3.1 to 6.0 */
+  transition: opacity .5s;
+}
+
+.header-menu:hover .adm_tab {
+  opacity: 1;
+}
 
 .header-menu [class*="adm_tab"]:hover .adm_label,
 .second-menu [class*="adm_tab"]:hover .adm_label {
@@ -66,6 +75,8 @@ body {
     margin: 0  1em .2em  1em;
     font-weight: 500;
     opacity: .5;
+    -webkit-transition: opacity .3s; /* For Safari 3.1 to 6.0 */
+    transition: opacity .3s;
 }
 
 [class*="adm_tab"][data-selected="1"] .adm_label{
@@ -140,8 +151,16 @@ body {
     cursor: pointer;
 }
 
-[class*="flex-container"][data-show="0"] {
+.flex-container {
     visibility: hidden;
+    opacity: 0;
+   -webkit-transition: opacity .5s; /* For Safari 3.1 to 6.0 */
+   transition: opacity .5s;
+}
+
+.flex-container[data-show="1"] {
+    visibility: visible;
+    opacity: 1;
 }
 
 .bread-crumb {
